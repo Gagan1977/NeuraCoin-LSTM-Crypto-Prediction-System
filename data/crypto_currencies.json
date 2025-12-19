@@ -1,0 +1,44 @@
+{
+  "coins": [
+    {
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "instrument": "BTC-USD"
+    },
+    {
+      "symbol": "ETH",
+      "name": "Ethereum",
+      "instrument": "ETH-USD"
+    },
+    {
+      "symbol": "XRP",
+      "name": "Ripple",
+      "instrument": "XRP-USD"
+    },
+    {
+      "symbol": "LTC",
+      "name": "Litecoin",
+      "instrument": "LTC-USD"
+    },
+    {
+      "symbol": "BCH",
+      "name": "Bitcoin Cash",
+      "instrument": "BCH-USD"
+    },
+    {
+      "symbol": "ADA",
+      "name": "Cardano",
+      "instrument": "ADA-USD"
+    },
+    {
+      "symbol": "DOGE",
+      "name": "Dogecoin",
+      "instrument": "DOGE-USD"
+    },
+    {
+      "symbol": "SOL",
+      "name": "Solana",
+      "instrument": "SOL-USD"
+    }
+  ]
+}
