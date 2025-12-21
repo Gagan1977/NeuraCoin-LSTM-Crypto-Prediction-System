@@ -1,40 +1,52 @@
-import os
 import torch
+import torch.nn as nn
 
 
-def get_device():
+class BaseModel(nn.Module):
+    """
+    Base model class with common utilities
+    """
+
+    def __init__(self):
+        super(BaseModel, self).__init__()
     
-    if torch.cuda.is_available():
-        return torch.device("cuda")
-    else:
-        return torch.device("cpu")
+    def count_parameters(self):
+        """Count trainable parameters"""
+        
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
     
-
-def save_model(model, path):
+    def get_device(self):
+        """Get model device"""
+        
+        return next(self.parameters()).device
     
-    directory = os.path.dirname(path)
+    def save_checkpoint(self, path, epoch, optimizer, loss):
+        """Save model checkpoint"""
+        
+        checkpoint = {
+            'epoch' : epoch,
+            'model_state_dict' : self.state_dict(),
+            'optimizer_state_dict' : optimizer.state_dict(),
+            'loss' : loss
+        }
 
-    if directory and not os.path.exists(directory):
-        os.makedirs(directory)
+        torch.save(checkpoint, path)
+        print(f"Checkpoint saved to {path}")
     
-    torch.save(model.state_dict(), path)
-    print(f"Model saved to {path}")
+    def load_checkpoint(self, path, optimizer=None):
+        """Load model checkpoint"""
+        
+        checkpoint = torch.load(path)
 
+        self.load_state_dict(checkpoint['model_state_dict'])
 
-def load_model(model, path, device=None):
-    
-    if device is None:
-        device = get_device()
+        if optimizer is not None:
+            optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
 
-    state_dict = torch.load(path, map_location=device)
-    
-    model.load_state_dict(state_dict)
+        print(f"Checkpoint loaded from {path}")
+        print(f"Epoch: {checkpoint['epoch']}, Loss: {checkpoint['loss']:.4f}")
 
-    model.to(device)
-
-    model.eval()
-
-    print(f"Model loaded from {path}")
-    return model
-
-
+        return {
+            'epoch' : checkpoint['epoch'],
+            'loss' : checkpoint['loss']
+        }
