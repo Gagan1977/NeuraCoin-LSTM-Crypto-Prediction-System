@@ -146,7 +146,7 @@ def json_to_csv(data, coin='BTC', interval='daily', market=MARKET):
         return None
 
     records = []
-    usd_to_inr = 88.27
+    #usd_to_inr = 88.27
 
     for entry in data['Data']:
         try:
@@ -155,12 +155,12 @@ def json_to_csv(data, coin='BTC', interval='daily', market=MARKET):
 
             record = {
                 'Date': date,
-                'Open': entry.get('OPEN', 0) * usd_to_inr,
-                'High': entry.get('HIGH', 0) * usd_to_inr,
-                'Low': entry.get('LOW', 0) * usd_to_inr,
-                'Close': entry.get('CLOSE', 0) * usd_to_inr,
+                'Open': entry.get('OPEN', 0),
+                'High': entry.get('HIGH', 0),
+                'Low': entry.get('LOW', 0),
+                'Close': entry.get('CLOSE', 0),
                 'Volume': entry.get('VOLUME', 0),
-                'Volume Quote': entry.get('QUOTE_VOLUME', 0) * usd_to_inr,
+                'Volume Quote': entry.get('QUOTE_VOLUME', 0),
                 'Market': entry.get('MARKET', market),
                 'Instrument': entry.get('INSTRUMENT', coin),
                 'Total Index': entry.get('TOTAL_INDEX_UPDATES', None)
