@@ -20,7 +20,6 @@ if not API_KEY:
 
 
 def load_crypto_currencies():
-
     '''
     Load Crypto Currencies from "crypto_currencies.json" file
     Return list of coin dictionaries with symbol, name, and instrument details
@@ -38,7 +37,6 @@ def load_crypto_currencies():
 
 
 def get_historical_data(instrument, interval='day', from_ts=None, to_ts=None, api_key=API_KEY, market=MARKET, limit=LIMIT):
-    
     """
     Fetch historical data from CoinDesk API
     interval: 'day' or 'hour'
@@ -174,7 +172,7 @@ def json_to_csv(data, coin='BTC', interval='daily', market=MARKET):
     df = pd.DataFrame(records)
     df.sort_values(by="Date", ascending=False, inplace=True)
 
-    filename = f"{coin}_INR_{interval.capitalize()}_Historical_data.csv"
+    filename = f"{coin}_USD_{'Daily' if interval is 'day' else 'Hourly'}_Historical_data.csv"
     try:
         df.to_csv(filename, index=False)
         print(f'Saved {filename} Successfully.')
