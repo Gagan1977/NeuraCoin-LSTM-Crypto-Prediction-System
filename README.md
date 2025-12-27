@@ -148,7 +148,7 @@ Output: .pt files in `data/processed/` and .pkl files in `model/scalers/`.
 Train the LSTM model. The script automatically detects and utilizes a GPU (CUDA) if available.
 
 ```bash
-python 4. model/train.py
+python model/train.py
 ```
 
 Output: Best performing model weights are saved to `model/checkpoints/`.
