@@ -198,6 +198,14 @@ def main():
     print(f'\nLoading scaler from {SCALER_PATH}...')
     scaler = joblib.load(SCALER_PATH)
 
+    # --- ADD THIS DEBUG BLOCK ---
+    print("\n--- DEBUGGING SCALER ---")
+    print(f"Scaler Data Min: {scaler.data_min_}")
+    print(f"Scaler Data Max: {scaler.data_max_}")
+    # If Data Max is [1.0, 1.0, 1.0, 1.0, 400000], your scaler is broken.
+    # It should be [69000, 69000, 69000, 69000, 100000000] (Real Bitcoin Prices)
+    # ----------------------------
+
     y_test_original = denormalize_data(y_test.numpy(), scaler)
     predictions_original = denormalize_data(predictions_normalized, scaler)
 

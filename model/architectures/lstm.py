@@ -24,7 +24,7 @@ class LSTMModel(BaseModel):
         )
 
         #Dropout layer
-        self.dropout = nn.Dropout(self.dropout)
+        self.dropout = nn.Dropout(dropout)
 
         #Output layer
         self.fc = nn.Linear(in_features=self.hidden_size, out_features=self.output_size)

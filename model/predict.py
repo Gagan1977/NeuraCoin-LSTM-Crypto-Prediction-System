@@ -43,7 +43,7 @@ def fetch_binance_data(symbol='BTCUSDT', interval='1d', limit=60):
         df = df.astype(float)
 
         print(f'Fetched {len(df)} candles')
-        print(f'    Latest Close: ${df['close'].iloc[-1]:, .2f}')
+        print(f'    Latest Close: ${df['close'].iloc[-1]:,.2f}')
 
         return df.values
     
@@ -134,7 +134,7 @@ def main():
     OUTPUT_SIZE = 5
     DROPOUT = 0.2
 
-    CHECKPOINT_PATH = f'model/checkpoints{TIMEFRAME}/{COIN_NAME}_best.pth'
+    CHECKPOINT_PATH = f'model/checkpoints/{TIMEFRAME}/{COIN_NAME}_best.pth'
     SCALER_PATH = f'model/scalers/{TIMEFRAME}/{COIN_NAME}_scaler.pkl'
 
     SYMBOL_MAP = {

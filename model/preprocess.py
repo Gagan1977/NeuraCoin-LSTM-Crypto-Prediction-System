@@ -11,6 +11,16 @@ def load_csv(file_path):
 
     print(f'Loading data from {file_path}...')
     df = pd.read_csv(file_path)
+
+    if 'Date' in df.columns:
+        print("Sorting data by Date (Oldest -> Newest)...")
+        df['Date'] = pd.to_datetime(df['Date'])
+        df = df.sort_values('Date', ascending=True).reset_index(drop=True)
+    else:
+        if df['Close'].iloc[0] > df['Close'].iloc[-1] * 100:
+             print("Data appears to be Newest-First. Reversing...")
+             df = df.iloc[::-1].reset_index(drop=True)
+
     print(f'Loaded {len(df)} rows')
     print(f'Columns: {df.columns.tolist()}')
 
